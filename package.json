@@ -1,0 +1,30 @@
+{
+  "name": "lotus-software",
+  "version": "1.0.0",
+  "description": "An information web page for Lotus software by Maha &amp; Sahar &amp; Sara &amp; Aman",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./tests/routes.test.js | tap-spec",
+    "server": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lotus-1/Lotus-Software.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lotus-1/Lotus-Software/issues"
+  },
+  "homepage": "https://github.com/lotus-1/Lotus-Software#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "morgan": "^1.9.1"
+  }
+}
