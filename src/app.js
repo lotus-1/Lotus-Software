@@ -40,6 +40,18 @@ app.get('/login', (req,res) => {
   res.render(path.join(__dirname, 'views', 'login.hbs'));
 });
 
+app.get('/login', (req,res) => {
+  res.render(path.join(__dirname, 'views', 'login.hbs'));
+});
+
+app.get('/home', (req,res) => {
+  res.render(path.join(__dirname, 'views', 'home.hbs'));
+});
+
+app.get('/details', (req,res) => {
+  res.render(path.join(__dirname, 'views', 'details.hbs'));
+});
+
 
 // app.get("/", (req, res) => {
 //   res.sendFile(__dirname, "..", "views", "signing.hbs");
