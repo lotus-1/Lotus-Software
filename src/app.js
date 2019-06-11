@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const bodyParser = require("body-parser");
+const body = require("body-parser");
 // const compression = require("compression");
 const exphbs = require("express-handlebars");
 const router = require("./controllers/router");
@@ -21,8 +21,8 @@ app.engine(
 app.disable("x-powered-by");
 
 // app.use(compression());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(body.json());
+app.use(body.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
