@@ -20,7 +20,9 @@
   "homepage": "https://github.com/lotus-1/Lotus-Software#readme",
   "devDependencies": {
     "nodemon": "^1.19.1",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.10.2"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -28,9 +30,7 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
-
     "morgan": "^1.9.1",
     "pg": "^7.11.0"
-
   }
 }
