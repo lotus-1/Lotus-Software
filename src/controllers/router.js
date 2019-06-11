@@ -5,6 +5,7 @@ const { postUsers, postInfo } = require("../database/queries/postDetails");
 const validate = require('../helpers/validate');
 const {loginValidation, signupValidation} = require('../helpers/validation');
 // router.get("/userdeemail=mahaforo276%40gmail.com&psw=511tails", getDetails);
+
 // router.post("/userdetails", postDetails);
 
 router.get('/', (req,res) => {
@@ -35,9 +36,18 @@ router.get('/details', (req,res) => {
   res.render(path.join(__dirname, '..', 'views', 'details'));
 });
 
+router.post('/signup', validate(signupValidation), (req,res)=>{
+  //const{ body:{ username, email, password, confirmPassword }}  = req;
+  //console.log(username,email,password);
+   res.json({succes: "signup validation is confirmed"})
+});
+
+router.post('login', validate(loginValidation), (req,res)=>{
+res.json({succes: "login validation is confirmed"})
+})
+
 // app.get("/userdetails", (req, res) => {
-//   res.sendFile(__dirname, "controllers", "index.js");
-//
+
 // });
 // const getDetailsIndex = response => {
 //   let data = [];
