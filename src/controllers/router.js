@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const { loginValidation, signupValidation } = require('../helpers/validation');
+const validate = require('../helpers/validate');
 
 
 // const { getDetails, postDetails } = require("../Database/queries");
@@ -30,9 +32,18 @@ router.get('/details', (req,res) => {
   res.render(path.join(__dirname, '..', 'views', 'details.hbs'));
 });
 
+router.post('/signup', validate(signupValidation), (req,res)=>{
+  //const{ body:{ username, email, password, confirmPassword }}  = req;
+  //console.log(username,email,password);
+   res.json({succes: "signup validation is confirmed"})
+});
+
+router.post('login', validate(loginValidation), (req,res)=>{
+res.json({succes: "login validation is confirmed"})
+})
+
 // app.get("/userdetails", (req, res) => {
-//   res.sendFile(__dirname, "controllers", "index.js");
-//
+
 // });
 // const getDetailsIndex = response => {
 //   let data = [];
