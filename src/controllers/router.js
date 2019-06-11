@@ -11,15 +11,11 @@ const path = require("path");
 // router.post("/userdetails", postDetails);
 
 router.get('/', (req,res) => {
-  res.sendFile(path.join(__dirname, '..', '..', 'public', 'signing.html'));
+  res.render(path.join(__dirname, '..', 'views', 'register.hbs'));
 });
 
-router.get('/signbtn', (req, res)=> {
-res.send('You already have an account');
-});
-
-router.get('/login', (req,res) => {
-  res.render(path.join(__dirname, '..', 'views', 'login.hbs'));
+router.post('/register', (req, res)=> {
+// res.send('You already have an account');
 });
 
 router.get('/login', (req,res) => {
