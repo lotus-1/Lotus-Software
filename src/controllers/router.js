@@ -4,6 +4,7 @@ const path = require("path");
 const { postUsers, postInfo } = require("../database/queries/postDetails");
 const validate = require('../helpers/validate');
 const {loginValidation, signupValidation} = require('../helpers/validation');
+const hashPsw = require('../helpers/hashing')
 // router.get("/userdeemail=mahaforo276%40gmail.com&psw=511tails", getDetails);
 // router.post("/userdetails", postDetails);
 
@@ -14,7 +15,7 @@ router.get('/', (req,res) => {
 router.post('/register', validate(signupValidation), (req,res)=> {
   const{ body:{ username, email, password, confirmPsw}}  = req;
     console.log(username,email,password);
-     res.send("signup validation is confirmed")
+     res.send("You already have an account")
   });
 
 router.get('/login', (req,res) => {
