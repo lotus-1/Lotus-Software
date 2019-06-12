@@ -2,16 +2,16 @@ const login = function fetchData("/login", data = {}) {
   fetch("/login", {
     method: 'POST',
     body: JSON.stringify(data),
-    headers: {'Content-Type': 'application/json'}
+    headers: {'Content-Type': 'applicatieon/json'}
   })
 
     .then(function(response) {
       return response.json();
     })
-    .then(res=>{
-      console.log('response',res);
+    .then(function(data) {
+      console.log(data)
     })
-}
+
 
 const button = document.getElementById('loginbtn');
 button.addEventListener('click', (event) => {
@@ -27,6 +27,3 @@ login('/loginbtn', {
     .catch(function(err) {
       console.log("there is an error:", err)
     })
-};
-
-})

@@ -1,4 +1,4 @@
-const dbConnection = require('../db_connection.js');
+const db = require('../db_connection.js');
 
 const postUsers = (username, email, password, cb) => {
   db.query(
@@ -23,7 +23,7 @@ const postInfo = (first_name, last_name, age, gender, high_learning, email, cb) 
   );
 };
 
-module.export = {
+module.exports = {
   postUsers,
   postInfo
 }
