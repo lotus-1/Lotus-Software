@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const { postUsers, postInfo } = require("../database/queries/postDetails");
+const postUsers = require("../database/queries/postDetails");
+// const postInfo = require("../database/queries/postDetails");
 const validate = require('../helpers/validate');
 const {loginValidation, signupValidation} = require('../helpers/validation');
 const hashPsw = require('../helpers/hashing')
@@ -14,9 +15,16 @@ router.get('/', (req,res) => {
 });
 
 router.post('/register', validate(signupValidation), (req,res)=> {
-  const{ body:{ username, email, password, confirmPsw}}  = req;
+  const { body:{ username, email, password, confirmPsw}}  = req;
     console.log(username,email,password);
-     res.send("You already have an account")
+    postUsers.postUsers(username, email, password, (response,request) => {
+      if (request) {
+        res.send("You already have an account")
+      } else {
+        res.send("User created")
+      }
+    })
+
   });
 
 router.get('/login', (req,res) => {
