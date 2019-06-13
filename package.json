@@ -2,7 +2,7 @@
   "name": "lotus-software",
   "version": "1.0.0",
   "description": "An information web page for Lotus software by Maha &amp; Sahar &amp; Sara &amp; Aman",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "node ./tests/routes.test.js | tap-spec",
     "start": "node app.js",
