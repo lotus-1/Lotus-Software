@@ -4,6 +4,8 @@ const body = require("body-parser");
 // const compression = require("compression");
 const exphbs = require("express-handlebars");
 const router = require("./controllers/router");
+const routerAuth = require('./controllers/routerAuth');
+require('dotenv').config();
 
 const app = express();
 
@@ -28,6 +30,10 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use(router);
 
+
 app.set('port', process.env.PORT || 5000);
+
+app.use(routerAuth);
+
 
 module.exports = app;
