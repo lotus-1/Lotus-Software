@@ -4,6 +4,8 @@ const body = require("body-parser");
 // const compression = require("compression");
 const exphbs = require("express-handlebars");
 const router = require("./controllers/router");
+const routerAuth = require('./controllers/routerAuth');
+require('dotenv').config();
 
 const app = express();
 
@@ -27,6 +29,6 @@ app.use(body.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use(router);
-
+app.use(routerAuth);
 
 module.exports = app;
