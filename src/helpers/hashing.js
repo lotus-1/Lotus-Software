@@ -1,12 +1,12 @@
 const bcrypt = require('bcrypt');
 
-const hashPsw = (password) => {
+const hashPsw = (password, cb) => {
   return bcrypt.hash(password, 10, (error, hash) => {
     if(error){
-      console.log('Error');
+      cb(error);
     } else {
       console.log('hash password:', hash);
-      return (null, hash);
+      cb(null, hash);
     }
   })
 };

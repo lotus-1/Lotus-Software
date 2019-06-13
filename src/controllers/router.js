@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const { postUsers, postInfo } = require("../database/queries/postDetails");
+const getUsers = require("../database/queries/getDetails");
+
+// const postInfo = require("../database/queries/postDetails");
 const validate = require('../helpers/validate');
 const {loginValidation, signupValidation} = require('../helpers/validation');
 const hashPsw = require('../helpers/hashing');
@@ -11,14 +14,35 @@ const { createCookie } = require('../helpers/createJwt');
 
 // router.post("/userdetails", postDetails);
 
+
 router.get('/', (req,res) => {
   res.render(path.join(__dirname, '..', 'views', 'register'));
 });
 
 router.post('/register', validate(signupValidation), (req,res)=> {
-  const{ body:{ username, email, password, confirmPsw}}  = req;
-    console.log(username,email,password);
-     res.send("You already have an account")
+  const { username, email, password, confirmPsw} = req.body;
+  hashPsw(password, (error, hashedPas) => {
+  if(error) {
+    console.log(error);
+  } else {
+    postUsers(username, hashedPas, email, (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      // res.send('<h1>Registration completed successfully</h1><button><a href="./login">Log</a></button>');
+      res.render(path.join(__dirname, '..', 'views', 'message'));
+    })
+  }
+
+
+})
+  });
+
+  router.get('/userdetails', (req, res) => {
+    getUsers.getUsers((error, response)=> {
+      if (error) return error;
+      res.json(response);
+    });
   });
 
 router.get('/login', (req,res) => {
