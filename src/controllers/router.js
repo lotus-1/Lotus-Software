@@ -1,30 +1,46 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const postUsers = require("../database/queries/postDetails");
+const { postUsers, postInfo } = require("../database/queries/postDetails");
+const getUsers = require("../database/queries/getDetails");
+
 // const postInfo = require("../database/queries/postDetails");
 const validate = require('../helpers/validate');
 const {loginValidation, signupValidation} = require('../helpers/validation');
 const hashPsw = require('../helpers/hashing')
-// router.get("/userdeemail=mahaforo276%40gmail.com&psw=511tails", getDetails);
 
 // router.post("/userdetails", postDetails);
+
 
 router.get('/', (req,res) => {
   res.render(path.join(__dirname, '..', 'views', 'register'));
 });
 
 router.post('/register', validate(signupValidation), (req,res)=> {
+  let dataArr = [];
   const { body:{ username, email, password, confirmPsw}}  = req;
-    console.log(username,email,password);
-    postUsers.postUsers(username, email, password, (response,request) => {
-      if (request) {
-        res.send("You already have an account")
+    console.log('in route /register :', username,email,password);
+    const data = req;
+    // console.log("this is our data:", data);
+    dataArr.push(data);
+    // console.log("this is the dataArr:", dataArr);
+    postUsers(username, email, password, (err, result) => {
+      if (err) {
+        console.log(err);
+        // res.send("You already have an account")
       } else {
-        res.send("User created")
+        console.log(result);
+        // res.send("User created")
       }
     })
 
+  });
+
+  router.get('/userdetails', (req, res) => {
+    getUsers.getUsers((error, response)=> {
+      if (error) return error;
+      res.json(response);
+    });
   });
 
 router.get('/login', (req,res) => {

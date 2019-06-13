@@ -1,8 +1,9 @@
 const db = require('../db_connection.js');
 
 const postUsers = (username, email, password, cb) => {
+  console.log("this is my pass:", password);
   db.query(
-    `INSERT INTO users (username, email, password) VALUES ($1, $2, $3, $4)`,
+    `INSERT INTO users (username, email, password) VALUES ($1, $2, $3)`,
     [username, email, password],
     (err, res) => {
       if (err) return cb(err);
