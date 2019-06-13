@@ -29,6 +29,11 @@ app.use(body.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use(router);
+
+
+app.set('port', process.env.PORT || 5000);
+
 app.use(routerAuth);
+
 
 module.exports = app;
