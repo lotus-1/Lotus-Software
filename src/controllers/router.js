@@ -35,12 +35,13 @@ router.post("/register", validate(signupValidation), (req, res) => {
           // res.render({
           //   user: `Hello, ${username}`
           // })
-        });
+        })
       }
 
 
-    });
+    })
   }
+});
 
 router.get("/login", (req, res) => {
   res.render(path.join(__dirname, "..", "views", "login"));
