@@ -5,86 +5,74 @@ const { postUsers, postInfo } = require("../database/queries/postDetails");
 const getUsers = require("../database/queries/getDetails");
 
 // const postInfo = require("../database/queries/postDetails");
-const validate = require('../helpers/validate');
-const {loginValidation, signupValidation} = require('../helpers/validation');
-const hashPsw = require('../helpers/hashing')
+const validate = require("../helpers/validate");
+const { loginValidation, signupValidation } = require("../helpers/validation");
+const hashPsw = require("../helpers/hashing");
+const createCookie = require("../helpers/createJwt");
+
+// router.get("/userdeemail=mahaforo276%40gmail.com&psw=511tails", getDetails);
 
 // router.post("/userdetails", postDetails);
 
-
-router.get('/', (req,res) => {
-  res.render(path.join(__dirname, '..', 'views', 'register'));
+router.get("/", (req, res) => {
+  res.render(path.join(__dirname, "..", "views", "register"));
 });
 
-router.post('/register', validate(signupValidation), (req,res)=> {
-  const { username, email, password, confirmPsw} = req.body;
-  hashPsw(password, (error, hashedPas) => {
-  if(error) {
-    console.log(error);
+router.post("/register", validate(signupValidation), (req, res) => {
+  const { username, email, password, confirmPsw } = req.body;
+  if (password != confirmPsw) {
+    res.send("Passwords do not match.");
   } else {
-    postUsers(username, hashedPas, email, (err, result) => {
-      if (err) {
-        console.log(err);
+    hashPsw(password, (error, hashedPas) => {
+      if (error) {
+        console.log(error);
+      } else {
+        postUsers(username, email, hashedPas, (err, result) => {
+          if (err) {
+            console.log(err);
+          }
+          res.render(path.join(__dirname, "..", "views", "message"));
+          // res.render({
+          //   user: `Hello, ${username}`
+          // })
+        });
       }
-      // res.send('<h1>Registration completed successfully</h1><button><a href="./login">Log</a></button>');
-      res.render(path.join(__dirname, '..', 'views', 'message'));
-
-    })
-  }
-})
-  });
-  router.get('/register', (req, res) => {
-  res.send("register", {
-    title: "name",
-    username: "sahar"
-  })
-})
 
 
-  router.get('/userdetails', (req, res) => {
-    getUsers.getUsers((error, response)=> {
-      if (error) return error;
-      res.json(response);
     });
+  }
+
+router.get("/login", (req, res) => {
+  res.render(path.join(__dirname, "..", "views", "login"));
+});
+
+
+router.post("/login", validate(loginValidation), (req, res) => {
+  const { email, password } = req.body;
+  getUsers(email, password)
+  console.log('this is password login: ', password);
+  createCookie({ email, password }, (err, result) => {
+    if (err) console.log(err);
+    else {
+      console.log(result);
+      res.cookie("jwt", result);
+      res.redirect('/home');
+    }
   });
-
-
-router.get('/login', (req,res) => {
-  res.render(path.join(__dirname, '..', 'views', 'login'));
 });
 
-router.post('/login', validate(loginValidation), (req,res)=>{
-  const{ body:{ email, password }}  = req;
-    console.log(email,password);
-  res.render(path.join(__dirname, '..', 'views', 'home'));
+router.get("/details", (req, res) => {
+  res.render(path.join(__dirname, "..", "views", "details"));
 });
 
-// router.get('/home', (req,res) => {
-//   res.render(path.join(__dirname, '..', 'views', 'home'));
-// });
+// router.post("/details", (req, res) => {
+// }
 
-router.get('/details', (req,res) => {
-  res.render(path.join(__dirname, '..', 'views', 'details'));
-
+router.get("/userdetails", (req, res) => {
+  getUsers.getUsers((error, response) => {
+    if (error) return error;
+    res.json(response);
+  });
 });
 
-router.post('/signup', validate(signupValidation), (req,res)=>{
-  //const{ body:{ username, email, password, confirmPassword }}  = req;
-  //console.log(username,email,password);
-   res.json({succes: "signup validation is confirmed"})
-});
-
-router.post('login', validate(loginValidation), (req,res)=>{
-res.json({succes: "login validation is confirmed"})
-})
-
-// app.get("/userdetails", (req, res) => {
-// });
-
-// const getDetailsIndex = response => {
-//   let data = [];
-//   getDetails((err, users) => {
-//     data.push(users);
-//   });
-// };
 module.exports = router;
