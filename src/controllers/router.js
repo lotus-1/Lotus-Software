@@ -33,7 +33,7 @@ router.post("/register", validate(signupValidation), (req, res) => {
           // res.render({
           //   user: `Hello, ${username}`
           // })
-        });
+        })
       }
     });
   }
@@ -83,11 +83,11 @@ router.get("/details", (req, res) => {
 // router.post("/details", (req, res) => {
 // }
 
-// router.get("/userdetails", (req, res) => {
-//   getPass((error, response) => {
-//     if (error) return error;
-//     res.json(response);
-//   });
-// });
+router.get("/userdetails", (req, res) => {
+  getPass((error, response) => {
+    if (error) return error;
+    res.json(response);
+  });
+});
 
 module.exports = router;
