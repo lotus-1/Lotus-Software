@@ -27,13 +27,19 @@ router.post('/register', validate(signupValidation), (req,res)=> {
         console.log(err);
       }
       // res.send('<h1>Registration completed successfully</h1><button><a href="./login">Log</a></button>');
-      res.render(path.join(__dirname, '..', 'views', 'message')); 
+      res.render(path.join(__dirname, '..', 'views', 'message'));
+
     })
   }
-
-
 })
   });
+  router.get('/register', (req, res) => {
+  res.send("register", {
+    title: "name",
+    username: "sahar"
+  })
+})
+
 
   router.get('/userdetails', (req, res) => {
     getUsers.getUsers((error, response)=> {
@@ -41,6 +47,7 @@ router.post('/register', validate(signupValidation), (req,res)=> {
       res.json(response);
     });
   });
+
 
 router.get('/login', (req,res) => {
   res.render(path.join(__dirname, '..', 'views', 'login'));
@@ -58,6 +65,7 @@ router.post('/login', validate(loginValidation), (req,res)=>{
 
 router.get('/details', (req,res) => {
   res.render(path.join(__dirname, '..', 'views', 'details'));
+
 });
 
 router.post('/signup', validate(signupValidation), (req,res)=>{
@@ -71,8 +79,8 @@ res.json({succes: "login validation is confirmed"})
 })
 
 // app.get("/userdetails", (req, res) => {
-
 // });
+
 // const getDetailsIndex = response => {
 //   let data = [];
 //   getDetails((err, users) => {
