@@ -14,6 +14,7 @@ const signupValidation = {
 };
 
 
+
 module.exports = {
   loginValidation,
   signupValidation
