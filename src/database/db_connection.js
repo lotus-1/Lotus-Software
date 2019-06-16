@@ -3,13 +3,12 @@ require('dotenv').config();
 const url = require('url');
 
 let DB_URL;
-if (process.env.NODE_ENV !== "production") {
+if (!process.env.DATABASE_URL) {
   DB_URL = process.env.TEST_DB_URL;
   console.log('NOT PROD', DB_URL);
 } else {
-  DB_URL = process.env.DB_URL;
+  DB_URL = process.env.DATABASE_URL;
   console.log('production', DB_URL);
-
 }
 
 if (!DB_URL)
