@@ -1,0 +1,90 @@
+body {
+  text-align: center;
+  background-image: url(assets/lotus2.jpeg);
+  /* background-image: url('https://data.1freewallpapers.com/download/lotus-flower-sparkle.jpg'); */
+  background-repeat: no-repeat;
+  background-size:  cover;
+  background-position: center;
+  background-origin: inherit;
+
+}
+
+/* regidter.hbs : */
+.h1register {
+  font-size: 60px;
+  position:  relative ;
+  left: 20px;
+  color: #2d2d86;
+}
+.h3register {
+  font-size: 30px;
+  position:  relative ;
+  left: 20px;
+}
+.h4register {
+  font-size: 30px;
+  position:  relative ;
+  left: 20px;
+}
+.para {
+  font-size: 15px;
+}
+.ul {
+  font-size: 15px;
+}
+.lotusInfo {
+  text-align: left;
+}
+.sign {
+  text-align: center;
+  float: right;
+  position:absolute; left:1000px; top: 100px;
+}
+input {
+  font-size: 20px;
+}
+label {
+  font-size: 25px;
+}
+.registerbtn {
+  font-size: 20px;
+}
+.para2 {
+  font-size: 20px;
+}
+.signlink {
+  font-size: 20px;
+}
+.registration {
+  font-size: 30px;
+  color: #2d2d86;
+}
+.lotusImg {
+  width: 260px;
+  height: 120px;
+  position:  relative ;
+  left: 20px;
+  border-radius: 10%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #2d2d86;
+}
+/* login.hbs : */
+.h1login{
+  font-size: 50px;
+  color: #2d2d86;
+}
+/* message.hbs */
+.h1message {
+  font-size: 45px;
+}
+.paraMessage {
+  font-size: 35px;
+  color: #2d2d86;
+}
+.btnMessage{
+  width: 90px;
+  height: 40px;
+  border-color: #2d2d86;
+  font-size: 20px;
+}

@@ -37,14 +37,15 @@ router.post("/register", validate(signupValidation), (req, res) => {
           // })
         });
       }
+
+
     });
   }
-
-});
 
 router.get("/login", (req, res) => {
   res.render(path.join(__dirname, "..", "views", "login"));
 });
+
 
 router.post("/login", validate(loginValidation), (req, res) => {
   const { email, password } = req.body;
