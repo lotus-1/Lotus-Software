@@ -59,7 +59,7 @@ router.post("/login", validate(loginValidation), (req, res) => {
       res.cookie("jwt", result);
       res.redirect('/home');
     }
-  });
+  })
 });
 
 router.get("/details", (req, res) => {
@@ -73,7 +73,7 @@ router.get("/userdetails", (req, res) => {
   getUsers.getUsers((error, response) => {
     if (error) return error;
     res.json(response);
-  });
+  })
 });
 
 module.exports = router;

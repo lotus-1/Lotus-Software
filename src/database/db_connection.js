@@ -2,7 +2,17 @@ const { Pool } = require('pg');
 require('dotenv').config();
 const url = require('url');
 
-if (!process.env.DB_URL)
+let DB_URL;
+if (process.env.NODE_ENV !== "production") {
+  DB_URL = process.env.TEST_DB_URL;
+  console.log('NOT PROD', DB_URL);
+} else {
+  DB_URL = process.env.DB_URL;
+  console.log('production', DB_URL);
+
+}
+
+if (!DB_URL)
   throw new Error('Environment  variable DB_URL must be set');
 
 const params = url.parse(process.env.DB_URL);
