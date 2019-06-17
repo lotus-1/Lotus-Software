@@ -87,3 +87,85 @@ label {
   border-color: #2d2d86;
   font-size: 20px;
 }
+/* home.hbs */
+.h1home {
+  font-size: 50px;
+  color: #2d2d86;
+}
+.h2home {
+  font-size: 40px;
+}
+.parahome  {
+  font-size: 25px;
+  text-align: left;
+
+}
+li {
+  font-size:25px;
+  text-align: left;
+
+}
+.h4home {
+  font-size: 40px;
+  color: #2d2d86;
+}
+.btnHome {
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+}
+.processImg {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #2d2d86;
+}
+.h3home {
+  font-size: 30px;
+  color: #2d2d86;
+
+}
+.founders {
+  text-align: right;
+  display:  inline-table;
+  margin: 50px 90% 24px 60%;
+
+}
+.developers {
+  text-align: right;
+  display:  inline-table;
+  margin: 50px 55% 24px 25%;
+  position: relative;
+  top: -240px;
+  margin-top:-5px;
+  margin-bottom:-250px;
+}
+.h3title {
+margin: 30px 40% 30px 10%;
+display:  inline;
+font-size: 30px;
+color: #2d2d86;
+}
+ .computersImg {
+   width: 250px;
+   height: 220px;
+   border-style: solid;
+   border-width: 2px;
+   border-color: #2d2d86;
+   text-align: right;
+   display:  inline-table;
+   margin: 50px 90% 24px 78%;
+   position:absolute; left:0px; top: 265px;
+ }
+/* details.hbs */
+.h1details {
+  font-size: 40px;
+  color: #2d2d86;
+}
+.h2details {
+  font-size: 25px;
+}
+.sendBtn {
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+}

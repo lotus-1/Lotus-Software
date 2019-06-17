@@ -83,7 +83,22 @@ router.get("/details", (req, res) => {
   res.render(path.join(__dirname, "..", "views", "details"));
 });
 
-// router.post("/details", (req, res) => {
-// }
+router.post("/details", (req, res) => {
+  postInfo(first_name, last_name, age, gender, high_learning, email, (err, res) => {
+     if (err) console.log("There is an error!");
+     else {
+        const conditions = (age, gender, learning) => {
+          if (age > 18 && gender === "female" && learning === "yes") {
+          res.send('<h4> Congratulations you are accepted ! </h1>')
+        } else {
+
+          res.send('Sorry you have not been accepted !')
+         }
+       }}
+
+    })
+  });
+
+
 
 module.exports = router;
