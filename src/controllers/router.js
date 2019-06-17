@@ -8,7 +8,7 @@ const { compare } = require("bcrypt");
 const validate = require("../helpers/validate");
 const { loginValidation, signupValidation } = require("../helpers/validation");
 const hashPsw = require("../helpers/hashing");
-const createCookie = require("../helpers/createJwt");
+const { createCookie } = require("../helpers/createJwt");
 const conditions = require("../helpers/details");
 // router.get("/userdeemail=mahaforo276%40gmail.com&psw=511tails", getDetails);
 // router.post("/userdetails", postDetails);
@@ -58,17 +58,17 @@ router.post("/login", validate(loginValidation), (req, res) => {
     if (!hashedPassword) {
       res.send("<h3> No user found !</h3>");
     } else {
-      compare(req.body.password, hashedPassword, (err, passMatch) => {
+      compare(req.body.psw, hashedPassword, (err, passMatch) => {
         if (err) console.log(err);
         if (!passMatch) {
           res.send("<h3> Passwords don't match ! </h3>");
         } else {
           console.log(req.body);
-          createCookie(req.body.username, req.body.password, (e, result) => {
+          createCookie(req.body.psw, (e, result) => {
             if (e) console.log(e);
             else {
               console.log(result);
-              res.cookie("jwt", result);
+              res.cookie("jwt", result, { maxAge: 900000, httpOnly: true });
               res.render(path.join(__dirname, "..", "views", "home"));
             }
           });
