@@ -29,12 +29,14 @@ router.post("/register", validate(signupValidation), (req, res) => {
         postUsers(username, email, hashedPas, (err, result) => {
           if (err) {
             console.log(err);
-          }
+          } else {
           res.render(path.join(__dirname, "..", "views", "message"));
           // res.render({
           //   user: `Hello, ${username}`
           // })
-        });
+        }
+        })
+
       }
     });
   }
@@ -99,6 +101,13 @@ router.post("/details", (req, res) => {
     })
   });
 
+router.post('/logout', (req, res) => {
+  let cookie = req.cookie;
+  console.log('this is my cookie', cookie);
+  let cookieKey = Object.keys(cookie);
+    res.clearCookie(`${cookieKey[0]}`, { maxAge:0, httpOnly: true});
+    res.redirect('/');
+  });
 
 
 module.exports = router;
