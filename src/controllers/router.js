@@ -4,11 +4,12 @@ const path = require("path");
 const { postUsers, postInfo } = require("../database/queries/postDetails");
 const { getPass, getInfo } = require("../database/queries/getDetails");
 // const postInfo = require("../database/queries/postDetails");
+const { compare } = require("bcrypt");
 const validate = require("../helpers/validate");
 const { loginValidation, signupValidation } = require("../helpers/validation");
 const hashPsw = require("../helpers/hashing");
-const createCookie = require("../helpers/createJwt");
-// const conditions = require("../helpers/details");
+const { createCookie } = require("../helpers/createJwt");
+const conditions = require("../helpers/details");
 // router.get("/userdeemail=mahaforo276%40gmail.com&psw=511tails", getDetails);
 // router.post("/userdetails", postDetails);
 
@@ -35,6 +36,7 @@ router.post("/register", validate(signupValidation), (req, res) => {
           // })
         }
         })
+
       }
     });
   }
@@ -44,7 +46,7 @@ router.get("/userdetails", (req, res) => {
   getPass((error, response) => {
     if (error) return error;
     res.json(response);
-  })
+  });
 });
 
 router.get("/login", (req, res) => {
@@ -52,24 +54,24 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", validate(loginValidation), (req, res) => {
-  const { email, password } = req.body;
-
-  getPass(email, (error, hashedPassword) => {
-    console.log('this is the hashedPassword:', hashedPassword);
+  getPass(req.body.username, (error, hashedPassword) => {
+    console.log("this is the hashedPassword:", hashedPassword);
     if (error) res.send("Username or password is not correct !");
     if (!hashedPassword) {
       res.send("<h3> No user found !</h3>");
     } else {
-      compare(password, hashedPassword, (err, passMatch) => {
+      compare(req.body.psw, hashedPassword, (err, passMatch) => {
         if (err) console.log(err);
         if (!passMatch) {
-          res.send("<h3> Password don't match ! </h3>");
+          res.send("<h3> Passwords don't match ! </h3>");
         } else {
-          createCookie({ email, password }, (e, result) => {
+          console.log(req.body);
+          createCookie(req.body.psw, (e, result) => {
             if (e) console.log(e);
             else {
               console.log(result);
-              res.cookie("jwt", result);
+              res.cookie("jwt", result, { maxAge: 900000, httpOnly: true });
+              res.render(path.join(__dirname, "..", "views", "home"));
             }
           });
         }
@@ -77,13 +79,10 @@ router.post("/login", validate(loginValidation), (req, res) => {
     }
   });
   // res.redirect("/home");
-
-  res.render(path.join(__dirname, "..", "views", "home"));
-
 });
 
 router.get("/details", (req, res) => {
-res.render(path.join(__dirname, "..", "views", "details"));
+  res.render(path.join(__dirname, "..", "views", "details"));
 });
 
 router.post("/details", (req, res) => {
@@ -109,8 +108,6 @@ router.post('/logout', (req, res) => {
     res.clearCookie(`${cookieKey[0]}`, { maxAge:0, httpOnly: true});
     res.redirect('/');
   });
-
-
 
 
 module.exports = router;

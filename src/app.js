@@ -16,7 +16,6 @@ app.engine(
   exphbs({
     extname: "hbs",
     layoutsDir: path.join(__dirname, "views", "layouts"),
-    partialsDir: path.join(__dirname, "views", "partials"),
     defaultLayout: "main"
   })
 );
@@ -33,6 +32,8 @@ app.use(router);
 
 
 app.set('port', process.env.PORT || 5000);
+app.set('host', process.env.HOST || 'localhost');
+
 
 app.use(routerAuth);
 
