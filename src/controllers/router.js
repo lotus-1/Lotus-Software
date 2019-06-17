@@ -10,7 +10,7 @@ const { loginValidation, signupValidation } = require("../helpers/validation");
 const hashPsw = require("../helpers/hashing");
 
 const { createCookie } = require("../helpers/createJwt");
-const conditions = require("../helpers/details");
+// const conditions = require("../helpers/details");
 
 // router.get("/userdeemail=mahaforo276%40gmail.com&psw=511tails", getDetails);
 // router.post("/userdetails", postDetails);
@@ -43,15 +43,6 @@ router.post("/register", validate(signupValidation), (req, res) => {
     });
   }
 });
-
-
-router.get("/userdetails", (req, res) => {
-  getPass((error, response) => {
-    if (error) return error;
-    res.json(response);
-  });
-});
-
 
 router.get("/login", (req, res) => {
   res.render(path.join(__dirname, "..", "views", "login"));
