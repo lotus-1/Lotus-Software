@@ -8,7 +8,7 @@ const validate = require("../helpers/validate");
 const { loginValidation, signupValidation } = require("../helpers/validation");
 const hashPsw = require("../helpers/hashing");
 const createCookie = require("../helpers/createJwt");
-const conditions = require("../helpers/details");
+// const conditions = require("../helpers/details");
 // router.get("/userdeemail=mahaforo276%40gmail.com&psw=511tails", getDetails);
 // router.post("/userdetails", postDetails);
 
@@ -82,12 +82,26 @@ router.post("/login", validate(loginValidation), (req, res) => {
 });
 
 router.get("/details", (req, res) => {
-
-  res.render(path.join(__dirname, "..", "views", "details"));
+res.render(path.join(__dirname, "..", "views", "details"));
 });
 
-// router.post("/details", (req, res) => {
-// }
+router.post("/details", (req, res) => {
+  postInfo(first_name, last_name, age, gender, high_learning, email, (err, res) => {
+     if (err) console.log("There is an error!");
+     else {
+        const conditions = (age, gender, learning) => {
+          if (age > 18 && gender === "female" && learning === "yes") {
+          res.send('<h4> Congratulations you are accepted ! </h1>')
+        } else {
+
+          res.send('Sorry you have not been accepted !')
+         }
+       }}
+
+    })
+  });
+
+
 
 
 
