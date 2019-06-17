@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const loginValidation = {
-    email: Joi.string().email().required(),
+    username: Joi.string().required(),
     psw: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
 };
 

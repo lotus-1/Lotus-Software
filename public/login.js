@@ -16,11 +16,11 @@ const login = function fetchData("/login", data = {}) {
 const button = document.getElementById('loginbtn');
 button.addEventListener('click', (event) => {
   event.preventDefault();
-  const email= document.getElementById('loginEmail').value;
+  const username= document.getElementById('loginUser').value;
   const password= document.getElementById('loginPsw').value;
 
 login('/loginbtn', {
-  email,
+  username,
   password
  });
 });

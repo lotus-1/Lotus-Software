@@ -1,5 +1,5 @@
 function fetchData() {
-  fetch("/register")
+  fetch("/userdetails")
     .then(function(response) {
       return response.json();
     })
