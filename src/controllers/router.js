@@ -8,7 +8,8 @@ const validate = require("../helpers/validate");
 const { loginValidation, signupValidation } = require("../helpers/validation");
 const hashPsw = require("../helpers/hashing");
 const createCookie = require("../helpers/createJwt");
-// const conditions = require("../helpers/details");
+//const conditions = require("../helpers/details;
+
 // router.get("/userdeemail=mahaforo276%40gmail.com&psw=511tails", getDetails);
 // router.post("/userdetails", postDetails);
 
@@ -39,12 +40,6 @@ router.post("/register", validate(signupValidation), (req, res) => {
   }
 });
 
-router.get("/userdetails", (req, res) => {
-  getPass((error, response) => {
-    if (error) return error;
-    res.json(response);
-  })
-});
 
 router.get("/login", (req, res) => {
   res.render(path.join(__dirname, "..", "views", "login"));
@@ -82,27 +77,23 @@ router.post("/login", validate(loginValidation), (req, res) => {
 });
 
 router.get("/details", (req, res) => {
-res.render(path.join(__dirname, "..", "views", "details"));
+
+  res.render(path.join(__dirname, "..", "views", "details"));
 });
 
-router.post("/details", (req, res) => {
-  postInfo(first_name, last_name, age, gender, high_learning, email, (err, res) => {
-     if (err) console.log("There is an error!");
-     else {
-        const conditions = (age, gender, learning) => {
-          if (age > 18 && gender === "female" && learning === "yes") {
-          res.send('<h4> Congratulations you are accepted ! </h1>')
-        } else {
+// router.post("/details", (req, res) => {
+// }
 
-          res.send('Sorry you have not been accepted !')
-         }
-       }}
-
-    })
+router.get("/userdetails", (req, res) => {
+  getPass((error, response) => {
+    if (error) return error;
+    res.json(response);
   });
+});
 
-
-
+router.get('*', (req, res) => {
+  res.render(path.join(__dirname, "..", "views", "error"));
+});
 
 
 module.exports = router;

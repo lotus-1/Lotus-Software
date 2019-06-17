@@ -169,3 +169,9 @@ color: #2d2d86;
   height: 40px;
   font-size: 20px;
 }
+
+@media screen and (max-width: 650px) {
+  body {
+    font-size: 45px;
+    text-align: center;
+ }
