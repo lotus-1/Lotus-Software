@@ -26,7 +26,7 @@ test('Should return a message', t => {
   .end((err, res) => {
     t.error(err);
     console.log(res.text)
-    t.deepEqual(res.text.includes('You already have an account'), true,  'send to the user massage: You alreday have an account')
+    t.deepEqual(res.text.includes('You already have an account'), true,  'send to the user message: You already have an account')
     t.end();
   });
 });
