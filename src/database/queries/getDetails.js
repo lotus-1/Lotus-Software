@@ -14,8 +14,8 @@ const getPass = (username, cb) => {
     [username],
     (err, res) => {
       if (err) console.log(err);
-      console.log("res.rows: ", res.rows[0].password);
-      cb(null, res.rows[0].password);
+      console.log("res.rows: ", res.rows[0].psw);
+      cb(null, res.rows[0].psw);
       // if (res.rows.length < 1) return cb(null, );
     }
   );
