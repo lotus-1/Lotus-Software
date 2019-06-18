@@ -1,37 +1,33 @@
-const details = function fetchData("/details", data = {}) {
-  fetch("/details", {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {'Content-Type': 'applicatieon/json'}
-  })
-
+function details(url, callback) {
+  fetch(url)
     .then(function(response) {
       return response.json();
     })
     .then(function(data) {
-      console.log(data)
+      callback(null, data);
+    });
+
+  var button = document.getElementById("sendBtn");
+  button
+    .addEventListener("click", event => {
+      event.preventDefault();
+      var firstName = document.getElementById("firstName").value;
+      var lastName = document.getElementById("lastName").value;
+      var age = document.getElementById("age").value;
+      var gender = document.getElementById("gender").value;
+      var learning = document.getElementById("learning").value;
+      var email = document.getElementById("email").value;
+
+      login("/sendBtn", {
+        firstName,
+        lastName,
+        age,
+        gender,
+        learning,
+        email
+      });
     })
-
-
-const button = document.getElementById('sendBtn');
-button.addEventListener('click', (event) => {
-  event.preventDefault();
-  const firstName = document.getElementById('firstName').value;
-  const lastName = document.getElementById('lastName').value;
-  const age = document.getElementById('age').value;
-  const gender = document.getElementById('gender').value;
-  const learning = document.getElementById('learning').value;
-  const email = document.getElementById('email').value;
-
-details('/sendBtn', {
-  firstName,
-  lastName,
-  age,
-  gender,
-  learning,
-  email
- });
-});
     .catch(function(err) {
-      console.log("there is an error:", err)
-    })
+      callback(err);
+    });
+}

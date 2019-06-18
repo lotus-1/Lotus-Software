@@ -3,7 +3,6 @@ const router = express.Router();
 const path = require("path");
 const { postUsers, postInfo } = require("../database/queries/postDetails");
 const { getPass, getInfo } = require("../database/queries/getDetails");
-// const postInfo = require("../database/queries/postDetails");
 const { compare } = require("bcrypt");
 const validate = require("../helpers/validate");
 const { loginValidation, signupValidation } = require("../helpers/validation");
@@ -11,9 +10,6 @@ const hashPsw = require("../helpers/hashing");
 
 const { createCookie } = require("../helpers/createJwt");
 // const conditions = require("../helpers/details");
-
-// router.get("/userdeemail=mahaforo276%40gmail.com&psw=511tails", getDetails);
-// router.post("/userdetails", postDetails);
 
 router.get("/", (req, res) => {
   res.render(path.join(__dirname, "..", "views", "register"));
@@ -32,13 +28,9 @@ router.post("/register", validate(signupValidation), (req, res) => {
           if (err) {
             console.log(err);
           } else {
-          res.render(path.join(__dirname, "..", "views", "message"));
-          // res.render({
-          //   user: `Hello, ${username}`
-          // })
-        }
-        })
-
+            res.render(path.join(__dirname, "..", "views", "message"));
+          }
+        });
       }
     });
   }
@@ -73,18 +65,18 @@ router.post("/login", validate(loginValidation), (req, res) => {
       });
     }
   });
-  // res.redirect("/home");
+});
+
+router.post("/logout", (req, res) => {
+  let cookie = req.cookie;
+  console.log("this is my cookie", cookie);
+  res.clearCookie({ maxAge: 0, httpOnly: true });
+  res.redirect("/login");
 });
 
 router.get("/details", (req, res) => {
-
   res.render(path.join(__dirname, "..", "views", "details"));
 });
-
-
-
-// router.post("/details", (req, res) => {
-// }
 
 router.get("/userdetails", (req, res) => {
   getPass((error, response) => {
@@ -93,18 +85,8 @@ router.get("/userdetails", (req, res) => {
   });
 });
 
-
-router.get('*', (req, res) => {
+router.get("*", (req, res) => {
   res.render(path.join(__dirname, "..", "views", "error"));
 });
-
-router.post('/logout', (req, res) => {
-  let cookie = req.cookie;
-  console.log('this is my cookie', cookie);
-  let cookieKey = Object.keys(cookie);
-    res.clearCookie(`${cookieKey[0]}`, { maxAge:0, httpOnly: true});
-    res.redirect('/');
-  });
-
 
 module.exports = router;

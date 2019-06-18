@@ -3,7 +3,7 @@
 
 ## Welcome to our application! :confetti_ball:
 
-## TO visit our website click on this [link]('https://aqueous-inlet-95922.herokuapp.com/')
+## TO visit our Lotus Software website [Click Here](https://aqueous-inlet-95922.herokuapp.com/)
 
 
 
