@@ -11,8 +11,8 @@ function login(url, callback) {
   button
     .addEventListener("click", event => {
       event.preventDefault();
-      const username = document.getElementById("loginUser").value;
-      const password = document.getElementById("loginPsw").value;
+      var username = document.getElementById("loginUser").value;
+      var password = document.getElementById("loginPsw").value;
 
       login("/loginbtn", {
         username,

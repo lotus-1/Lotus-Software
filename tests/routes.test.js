@@ -42,19 +42,6 @@ test('/login', t => {
   });
 });
 
-// test('/login', t => {
-//   request(app)
-//   .get('/login')
-//   .expect(200)
-//   .end((err, res) => {
-//     t.error(err);
-//     console.log(JSON.stringify(res));
-//     t.deepEqual(res.path === 'string', false, 'read the file: login');
-//     t.end();
-//   });
-// });
-
-
 test('/details', t => {
   request(app)
   .get('/details')

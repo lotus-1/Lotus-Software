@@ -1,4 +1,4 @@
-const db = require('../db_connection.js');
+const db = require("../db_connection.js");
 
 const postUsers = (username, email, password, cb) => {
   console.log("this is my pass:", password);
@@ -12,9 +12,16 @@ const postUsers = (username, email, password, cb) => {
   );
 };
 
-const postInfo = (first_name, last_name, age, gender, high_learning, email, cb) => {
+const postInfo = (
+  first_name,
+  last_name,
+  age,
+  gender,
+  high_learning,
+  email,
+  cb
+) => {
   db.query(
-
     `INSERT INTO info (first_name, last_name, age, gender, high_learning, email) VALUES ($1, $2, $3, $4, $5, $6)`,
     [first_name, last_name, age, gender, high_learning, email],
     (err, res) => {
@@ -27,4 +34,4 @@ const postInfo = (first_name, last_name, age, gender, high_learning, email, cb) 
 module.exports = {
   postUsers,
   postInfo
-}
+};
