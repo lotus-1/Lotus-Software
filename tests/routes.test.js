@@ -22,7 +22,6 @@ test('Should return a message', t => {
   request(app)
   .get('/signbtn')
   .expect(200)
-  // .expect('Content-Type', /json/)
   .end((err, res) => {
     t.error(err);
     console.log(res.text)

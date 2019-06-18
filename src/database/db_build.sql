@@ -17,7 +17,6 @@ CREATE TABLE info (
   last_name VARCHAR(30) NOT NULL,
   age VARCHAR(2) NOT NULL,
   gender VARCHAR(30) NOT NULL,
-  high_learning VARCHAR(3) NOT NULL,
   email VARCHAR(100) NOT NULL
 );
 
