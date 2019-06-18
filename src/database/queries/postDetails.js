@@ -17,16 +17,20 @@ const postInfo = (
   last_name,
   age,
   gender,
-  high_learning,
   email,
   cb
 ) => {
+  console.log("i am in postInfo")
+  console.log("this is the firstname in postInfo:", first_name);
   db.query(
-    `INSERT INTO info (first_name, last_name, age, gender, high_learning, email) VALUES ($1, $2, $3, $4, $5, $6)`,
-    [first_name, last_name, age, gender, high_learning, email],
+    `INSERT INTO info (first_name, last_name, age, gender, email) VALUES ($1, $2, $3, $4, $5)`,
+    [first_name, last_name, age, gender, email],
     (err, res) => {
       if (err) return cb(err);
-      cb(null, res);
+      else {
+        console.log("user added");
+        cb(null, res);
+      }
     }
   );
 };

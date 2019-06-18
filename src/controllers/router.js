@@ -7,9 +7,8 @@ const { compare } = require("bcrypt");
 const validate = require("../helpers/validate");
 const { loginValidation, signupValidation } = require("../helpers/validation");
 const hashPsw = require("../helpers/hashing");
-
 const { createCookie } = require("../helpers/createJwt");
-// const conditions = require("../helpers/details");
+
 
 router.get("/", (req, res) => {
   res.render(path.join(__dirname, "..", "views", "register"));
@@ -77,6 +76,38 @@ router.post("/logout", (req, res) => {
 router.get("/details", (req, res) => {
   res.render(path.join(__dirname, "..", "views", "details"));
 });
+
+// router.post("/details", (req, res) => {
+//   const { firstName, lastName, age, gender, email} = req.body;
+//   console.log("this is the firsname:", firstName);
+//   postInfo(firstName,lastName, age, gender, email, (err, res) => {
+//      if (err) console.log("There is an error!:", err);
+//         const conditions = (age, gender) => {
+//           if (age > 18 && gender === "female") {
+//           res.send('<h4> Congratulations you are accepted ! </h1>');
+//         } else {
+//           res.send('Sorry you have been not accepted !');
+//         };
+//        };
+// });
+// });
+router.post("/details", (req, res) => {
+  const { firstName, lastName, age, gender, email} = req.body;
+  // const conditions = (age, gender) => {
+    if (!(age > 18) || !(gender == "female")) {
+      res.send('<h1>Sorry you have been not accepted !</h1>');
+  } else {
+    postInfo(firstName,lastName, age, gender, email, (err, result) => {
+       if (err) console.log("There is an error!:", err);
+       else {
+         res.send('<h1> Congratulations you are accepted ! <br> We will send you an email! </h1>');
+};
+    });
+  }
+// };
+});
+
+
 
 router.get("/userdetails", (req, res) => {
   getPass((error, response) => {

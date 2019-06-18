@@ -1,4 +1,4 @@
-<form>
+<form action="/details" method="POST">
   <div class="container">
     <h1 class="h1details">Employee Details</h1>
     <h2 class="h2details">Please Enter Your Information!</h2>
@@ -16,16 +16,13 @@
     <label id="gender" for="gender"><b>Gender: </b></label>
     <input type="gender" placeholder="male / female" name="gender" required>
 <br><br>
-    <label id="learning" for="hLeraning"><b>Do you have a high school deploma? </b></label>
-    <input type="hLearning" placeholder="yes / no" name="hLeraning" required>
 
-<br><br>
     <label id="email" for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" required>
 
     <hr>
 
-    <button type="submit" class="sendBtn">Send</button>
+    <button type="submit" id="sendBtn" class="sendBtn">Send</button>
   </div>
 
 </form>
